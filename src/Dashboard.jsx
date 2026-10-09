@@ -3,8 +3,19 @@ import NavBar from './comp/NavBar'
 import Card from './comp/Card';
 import heroImage from './img/p2.jpg'
 import apiReq, { reqDia } from './service/apiService';
+import { useNavigate } from 'react-router-dom';
 
-const App = () => {
+const Dashboard = () => {
+
+  const navigate = useNavigate();
+
+  const irExplore = () => {
+    navigate('/explore')
+  }
+
+  const irMostarMais = () => {
+    navigate('/mostrarMais')
+  }
 
 
   const [scrollY, setScrollY] = useState(0);
@@ -22,14 +33,6 @@ const App = () => {
   }, [])
 
 
-  // const highlights = [
-  //   '2025-11-20',
-  //   '2025-11-17',
-  //   '2025-11-07',
-  //   '2025-10-31',
-  //   '2025-10-21',
-  //   '2025-09-29'
-  // ];
 
   const [cards, setCard] = useState([]);
 
@@ -78,7 +81,8 @@ const App = () => {
           <p className="mb-6 text-xs uppercase tracking-[0.25em] text-violet-400">Beyond the stars</p>
           <h1 className="max-w-3xl text-6xl font-medium leading-[0.95] tracking-tight md:text-7xl">A window into the stars.</h1>
           <p className="mt-8 max-w-xl text-base leading-7 text-zinc-300 md:text-xl">Discover the beauty and mystery of the universe through images that reveal what lies beyond our world.</p>
-          <button className="mt-8 w-fit rounded-full bg-white px-6 py-3 text-sm font-medium text-[#08090d] transition hover:-translate-y-1">
+          <button className="mt-8 w-fit rounded-full bg-violet-700 text-zinc-200 px-6 py-3 text-sm font-medium transition hover:bg-violet-600 hover:-translate-y-1"
+            onClick={irExplore}>
             Explore the cosmos →
           </button>
           <p className="mt-20 text-sm text-zinc-400 md:text-base">Beyond the blue, there is a universe waiting to be discovered.</p>
@@ -88,7 +92,8 @@ const App = () => {
       <main className=''>
         {/* highlights
         ultimos 10 dias */}
-        <section className='px-8 py-24 md:px-16'>
+        <section className='px-8 py-24 md:px-16 '
+        >
           <div className='mb-10'>
             <p className='text-sm uppercase tracking-[0.25em] text-violet-400'>
               Highlights
@@ -107,6 +112,12 @@ const App = () => {
               })
             }
           </div>
+          <div className="flex justify-center">
+            <button className="mt-8 w-fit rounded-full bg-violet-700 text-zinc-200 px-6 py-3 text-sm font-medium transition hover:bg-violet-600 hover:-translate-y-1"
+              onClick={irMostarMais}>
+              Explore more →
+            </button>
+          </div>
         </section>
         <section className='px-8 py-24 md:px-16 '>
 
@@ -123,17 +134,19 @@ const App = () => {
           {cardDia && (
             <div className='bg-gray-50 w-full flex flex-col items-center mx-auto max-w-6xl gap-3 rounded-lg border border-violet-200/40 p-2 shadow-[0_0_25px_rgba(192,168,255,0.5)] md:flex-row items-center transition duration-300 hover:translate-x-1'>
 
-              <div className='w-full md:w-[66%] flex flex-col items-center'>
+              <div className='w-full md:w-[66%] flex flex-col items-center '>
 
                 <h2 className="text-lg font-medium text-gray-900 mb-4">
                   {cardDia.title}
                 </h2>
 
-                <img
-                  src={cardDia.hdurl}
-                  alt={cardDia.alt}
-                  className="h-96 w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105"
-                />
+                <div className='overflow-hidden rounded-lg'>
+                  <img
+                    src={cardDia.hdurl}
+                    alt={cardDia.alt}
+                    className="h-96 w-full rounded-lg object-cover transition-transform duration-300 hover:scale-110"
+                  />
+                </div>
               </div>
               <div className='w-full md:w-[40%] p-1'>
                 <p className='text-xs uppercase tracking-[0.25em] text-violet-500'>
@@ -156,21 +169,22 @@ const App = () => {
           )}
         </section>
       </main>
-      <footer className='px-3 py-6 md:px-10 flex flex-col items-center'>
+      <footer className='px-3 py-6 md:px-10'>
         {/* creditos + links */}
-        <h2 className='text-xl font-medium text-violet-500 uppercase tracking-[0.25em]'>
-          Beyond the stars
-        </h2>
-        <p className='mt-3 max-w-md text-sm leading-6 text-zinc-400'>
-          Discover the beauty and mystery of the universe through NASA's imagery.
-        </p>
-        <p className="mt-4 text-xs text-zinc-500">
-          Data provided by NASA · APOD
-        </p>
-
-        <p className="mt-2 text-xs text-zinc-600">
-          © 2026 Beyond the Stars
-        </p>
+        <div className="flex flex-col md:items-center md:mx-auto md:max-w-7xl">
+          <h2 className='text-xl font-medium text-violet-500 uppercase tracking-[0.25em]'>
+            Beyond the stars
+          </h2>
+          <p className='mt-3 max-w-md text-sm leading-6 text-zinc-400'>
+            Discover the beauty and mystery of the universe through NASA's imagery.
+          </p>
+          <p className="mt-4 text-xs text-zinc-500">
+            Data provided by NASA · APOD
+          </p>
+          <p className="mt-2 text-xs text-zinc-600">
+            © 2026 Beyond the Stars
+          </p>
+        </div>
 
       </footer>
     </div>
@@ -179,5 +193,25 @@ const App = () => {
 
 // NASA · ASTRONOMY PICTURE OF THE DAY
 
-export default App;
+export default Dashboard;
 
+// feature/routes
+//      ↓
+// add → commit → push
+//      ↓
+// switch main
+//      ↓
+// pull
+//      ↓
+// merge feature/routes
+//      ↓
+// push
+
+// git add .
+// git commit -m "feat: adiciona rotas"
+// git push -u origin feature/routes
+// git push
+// git switch main
+// git pull
+// git merge feature/routes
+// git push
